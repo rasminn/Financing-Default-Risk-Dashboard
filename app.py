@@ -42,6 +42,37 @@ plt.tight_layout()
 st.pyplot(fig_emp)
 st.markdown("This chart illustrates the default rate across different employment types within the currently filtered customer segment. Observe the varying default risks associated with each category.")
 
+#risk scoring
+def compute_risk_score(row):
+    score = 0
+    if row['DTI'] > 0.6:
+        score += 1
+    if row['repayment_ratio'] < 0.3:
+        score += 1
+    if row['age'] < 30:
+        score += 1
+    if row['monthly_income'] < 5000:
+        score += 1
+    if 'Private' in row['employment_type_description']:
+        score += 1
+    return score
+
+filtered_df['risk_score'] = filtered_df.apply(compute_risk_score, axis=1)
+
+def risk_label(score):
+    if score <= 1:
+        return "Low Risk ✅"
+    elif score <= 3:
+        return "Medium Risk ⚠️"
+    else:
+        return "High Risk 🔥"
+
+filtered_df['risk_category'] = filtered_df['risk_score'].apply(risk_label)
+st.subheader("🧮 Customer Risk Scoring Table")
+st.write("This table classifies each customer into Low, Medium, or High risk based on financial indicators:")
+
+st.dataframe(filtered_df[['age', 'monthly_income', 'DTI', 'repayment_ratio', 'employment_type_description', 'risk_score', 'risk_category']].sort_values(by='risk_score', ascending=False).reset_index(drop=True))
+
 # Distribution of DTI by Default Status
 st.subheader("Distribution of DTI by Default Status")
 fig_dti, ax_dti = plt.subplots()

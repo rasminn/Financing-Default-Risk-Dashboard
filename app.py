@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 
 # Load your merged DataFrame
 try:
-    df = pd.read_csv('merged_dataset.csv')
+    df = pd.read_csv('merged_dataset_sample.csv')
 except FileNotFoundError:
-    st.error("Error: 'merged_dataset.csv' not found. Please make sure it's in the same directory.")
+    st.error("Error: 'merged_dataset_sample.csv' not found. Please make sure it's in the same directory.")
     st.stop()
 except pd.errors.EmptyDataError:
-    st.error("Error: 'merged_dataset.csv' is empty.")
+    st.error("Error: 'merged_dataset_sample.csv' is empty.")
     st.stop()
 except Exception as e:
     st.error(f"An error occurred while loading the dataset: {e}")

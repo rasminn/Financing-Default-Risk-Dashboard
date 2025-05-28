@@ -72,11 +72,12 @@ except FileNotFoundError:
     st.warning("Warning: 'confusion_matrix.png' not found. Please make sure it's in the same directory if you want to display it.")
 st.markdown("This is the confusion matrix, showing the performance of our predictive model. It details the true positives, true negatives, false positives, and false negatives.")
 
-# Recommendations
-st.header("📌 Key Recommendations")
+# key insights
+st.header("📌 Key Insights from the Dashboard")
 st.markdown("""
-- **Flag customers with DTI > 0.6 and repayment ratio < 0.3:** This rule identifies customers with high debt relative to income and a poor repayment history, indicating higher risk.
-- **Consider closer monitoring of private-sector employees:** The employment type analysis suggests a potentially higher default rate in this sector within the filtered data.
-- **Implement strategies to better identify potential defaulters:** The confusion matrix (if visible) highlights areas where the current model could be improved to reduce false negatives.
-- **Further analysis on the distributions of DTI and repayment ratio:** A deeper statistical look at these features could help refine the thresholds used for risk assessment.
+- **Private sector employees** consistently show higher default rates compared to government or public-sector employees.
+- Customers with **monthly income under RM5,000** show elevated default risk — particularly within private sector employment.
+- **Younger customers (under age 30)** display a higher default rate, indicating greater financial volatility or less credit history.
+- A specific **product type (likely Personal Financing)** dominates the default risk — suggesting the need for product-specific policy tightening.
+- Combining low income, young age, and private sector employment highlights a **high-risk segment** worth closer scrutiny.
 """)
